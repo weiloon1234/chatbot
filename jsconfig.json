@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "checkJs": true,
+        "allowJs": true,
+        "baseUrl": ".",
+        "paths": {
+            "#/*": ["./resources/scripts/*"],
+            "@/*": ["./lang/*"],
+            "~/shared/*": ["./resources/scripts/shared/*"],
+            "~/admin/*": ["./resources/scripts/admin/*"],
+            "~/user/*": ["./resources/scripts/user/*"]
+        }
+    },
+    "include": ["resources/**/*.js", "resources/**/*.vue"],
+    "exclude": ["node_modules", "dist"]
+}
