@@ -1,5 +1,6 @@
 <template>
     <base-node
+        :id="id"
         :data="data"
         class="node-default"
         @delete-node="deleteNode"

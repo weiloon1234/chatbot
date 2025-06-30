@@ -43,9 +43,13 @@
 import {inject} from "vue";
 import {useI18n} from "vue-i18n";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
-import {Handle} from "@vue-flow/core";
+import {Handle, useVueFlow} from "@vue-flow/core";
 
 const props = defineProps({
+    id: {
+        type: String,
+        required: true,
+    },
     data: {
         required: false,
         type: Object,
@@ -57,12 +61,14 @@ const emit = defineEmits(['delete-node']);
 
 const $i18n = useI18n();
 const $helper = inject('$helper');
+const { removeNodes } = useVueFlow();
 
 const deleteNode = async () => {
     await $helper.alertConfirm({
-        message: $i18n.t('Confirm delete node x?').toString().replace(/:x/i, props.title),
+        message: $i18n.t('Confirm delete node x?').toString().replace(/:x/i, props.data?.label ?? ' '),
         callback: (result) => {
             if (result.isConfirmed) {
+                removeNodes([props.id]);
                 emit('delete-node');
             }
         }

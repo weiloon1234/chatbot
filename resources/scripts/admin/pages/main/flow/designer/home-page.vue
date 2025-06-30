@@ -18,7 +18,7 @@ import DesignerCanvas from "#/shared/components/flow/designer-canvas.vue";
 const defaultNodes = ref([
     {
         id: '1',
-        type: 'nodeType1',
+        type: 'normalNode',
         position: { x: 250, y: 5 },
         data: {
             label: 'Node 1',
@@ -28,6 +28,19 @@ const defaultNodes = ref([
     { id: '2', label: 'Node 2', position: { x: 100, y: 200 } },
     { id: '3', label: 'Node 3', position: { x: 400, y: 250 } },
     { id: '4', label: 'Node 4', position: { x: 400, y: 500 } },
+    {
+        id: 'question1',
+        type: 'qnaNode',
+        position: { x: 400, y: 800 },
+        data: {
+            label: 'What is your favorite color?',
+            options: [
+                { id: 'opt1', label: 'Red' },
+                { id: 'opt2', label: 'Blue' },
+                { id: 'opt3', label: 'Green' },
+            ]
+        }
+    }
 ]);
 
 const defaultEdges = ref([

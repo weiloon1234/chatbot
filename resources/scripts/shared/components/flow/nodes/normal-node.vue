@@ -1,18 +1,16 @@
 <template>
     <base-node
+        :id="id"
         :data="data"
-        class="node-type-1"
-        @delete-node="deleteNode"
+        class="normal-node"
     >
-        The content slot
+        {{ id }}
     </base-node>
 </template>
 
 <script setup>
-import { useVueFlow } from '@vue-flow/core'
 import BaseNode from "#/shared/components/flow/base-node.vue";
-
-const props = defineProps({
+defineProps({
     id: {
         type: String,
         required: true,
@@ -23,10 +21,4 @@ const props = defineProps({
         default: () => null,
     },
 });
-
-const { removeNodes } = useVueFlow();
-
-const deleteNode = async () => {
-    removeNodes([props.id]);
-};
 </script>

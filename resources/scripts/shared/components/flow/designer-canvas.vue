@@ -17,7 +17,8 @@
 import {VueFlow} from '@vue-flow/core';
 import edgeDefault from "./edge-default.vue";
 import nodeDefault from "./node-default.vue";
-import nodeType1 from "./node-type-1.vue";
+import normalNode from "./nodes/normal-node.vue";
+import qnaNode from "./nodes/qna-node.vue";
 import {ref, watch, markRaw} from "vue";
 
 const props = defineProps({
@@ -59,22 +60,29 @@ const onEdgesChange = (newEdges) => {
 
 const nodeTypes = {
     default: markRaw(nodeDefault),
-    nodeType1: markRaw(nodeType1),
+    normalNode: markRaw(normalNode),
+    qnaNode: markRaw(qnaNode),
 };
 const edgeTypes = {
     default: markRaw(edgeDefault),
 };
 
-const onConnect = ({ source, target }) => {
+const onConnect = ({ source, sourceHandle, target, targetHandle }) => {
     const newEdge = {
-        id: `e${source}-${target}`,
+        id: `e${source}-${sourceHandle}-${target}`,
         source,
+        sourceHandle,
         target,
+        targetHandle,
         type: 'default',
     };
 
-    // Avoid duplicate
-    if (!localEdges.value.find(e => e.source === source && e.target === target)) {
+    // Avoid duplicates (check sourceHandle too)
+    if (
+        !localEdges.value.find(
+            e => e.source === source && e.sourceHandle === sourceHandle && e.target === target
+        )
+    ) {
         localEdges.value.push(newEdge);
         emit('update:edges', [...localEdges.value]);
     }
