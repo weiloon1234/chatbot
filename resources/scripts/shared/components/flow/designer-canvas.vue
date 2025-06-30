@@ -72,13 +72,18 @@ const edgeTypes = {
 
 const onConnect = ({ source, sourceHandle, target, targetHandle }) => {
     const newEdge = {
-        id: `${source}-${sourceHandle}-${target}`,
         source,
         sourceHandle,
         target,
         targetHandle,
         type: 'default',
     };
+
+    if (sourceHandle) {
+        newEdge.id = `${source}-${sourceHandle}-${target}`;
+    } else {
+        newEdge.id = `${source}-${target}`;
+    }
 
     // Avoid duplicates (check sourceHandle too)
     if (

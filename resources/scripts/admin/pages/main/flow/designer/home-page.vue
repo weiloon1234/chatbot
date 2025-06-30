@@ -58,7 +58,7 @@ const defaultNodes = ref([
 ]);
 
 const defaultEdges = ref([
-    {id: "1-null-question1", type: "default", source: "1", target: "question1"},
+    {id: "1-question1", type: "default", source: "1", target: "question1"},
     {id: "question1-answer-opt1-english", type: "default", source: "question1", target: "english", sourceHandle: "answer-opt1"},
     {id: "question1-answer-opt2-chinese", type: "default", source: "question1", target: "chinese", sourceHandle: "answer-opt2"},
 ]);
