@@ -130,6 +130,18 @@ const routes = [
                         ],
                     },
                     {
+                        path: 'flow',
+                        component: BlankRouter,
+                        redirect: {name: 'admin.flow.designer'},
+                        children: [
+                            {
+                                path: 'designer',
+                                component: () => import('./pages/main/flow/designer/home-page.vue'),
+                                name: 'admin.flow.designer',
+                            },
+                        ],
+                    },
+                    {
                         path: 'logs',
                         name: 'admin.etc.logs',
                         component: () => import('./pages/main/etc/logs-page.vue'),
