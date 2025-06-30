@@ -5,7 +5,7 @@
         class="node-default"
         @delete-node="deleteNode"
     >
-        The content slot
+        {{ data?.content }}
     </base-node>
 </template>
 

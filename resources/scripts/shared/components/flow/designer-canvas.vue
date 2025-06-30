@@ -1,14 +1,14 @@
 <template>
     <vue-flow
-        :nodes="localNodes"
-        :edges="localEdges"
+        v-model:nodes="localNodes"
+        v-model:edges="localEdges"
         :node-types="nodeTypes"
         :edge-types="edgeTypes"
         :default-viewport="{ zoom: 0.5 }"
         :max-zoom="4"
         :min-zoom="0.1"
-        @update:nodes="onNodesChange"
         @update:edges="onEdgesChange"
+        @nodes-change="onNodeChanged"
         @connect="onConnect"
     />
 </template>
@@ -41,22 +41,25 @@ const localEdges = ref([...props.edges]);
 // Watch for external changes and sync
 watch(() => props.nodes, (newVal) => {
     localNodes.value = [...newVal];
+    console.log('triggered??');
 });
 
 watch(() => props.edges, (newVal) => {
     localEdges.value = [...newVal];
 });
 
-// Emit changes when Vue Flow updates them
-const onNodesChange = (newNodes) => {
-    localNodes.value = newNodes;
-    emit('update:nodes', newNodes);
-}
+const onNodeChanged = (updatedNode) => {
+    const nodes = [...localNodes.value];
+    const index = nodes.findIndex(node => node.id === updatedNode.id);
+    if (index !== -1) {
+        nodes[index] = updatedNode;
+        emit('update:nodes', nodes);
+    }
+};
 
-const onEdgesChange = (newEdges) => {
-    localEdges.value = newEdges;
-    emit('update:edges', newEdges);
-}
+const onEdgesChange = (edges) => {
+    emit('update:edges', edges);
+};
 
 const nodeTypes = {
     default: markRaw(nodeDefault),
@@ -69,7 +72,7 @@ const edgeTypes = {
 
 const onConnect = ({ source, sourceHandle, target, targetHandle }) => {
     const newEdge = {
-        id: `e${source}-${sourceHandle}-${target}`,
+        id: `${source}-${sourceHandle}-${target}`,
         source,
         sourceHandle,
         target,

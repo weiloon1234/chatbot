@@ -4,7 +4,7 @@
         :data="data"
         class="normal-node"
     >
-        {{ id }}
+        {{ data?.content }}
     </base-node>
 </template>
 

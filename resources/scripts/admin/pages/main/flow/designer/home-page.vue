@@ -22,31 +22,45 @@ const defaultNodes = ref([
         position: { x: 250, y: 5 },
         data: {
             label: 'Node 1',
+            content: 'Say hello to the world!',
             isFirstNode: true,
         }
     },
-    { id: '2', label: 'Node 2', position: { x: 100, y: 200 } },
-    { id: '3', label: 'Node 3', position: { x: 400, y: 250 } },
-    { id: '4', label: 'Node 4', position: { x: 400, y: 500 } },
     {
         id: 'question1',
         type: 'qnaNode',
-        position: { x: 400, y: 800 },
+        position: { x: 250, y: 400 },
         data: {
-            label: 'What is your favorite color?',
+            label: 'Language?',
+            content: 'What language do you prefer?',
             options: [
-                { id: 'opt1', label: 'Red' },
-                { id: 'opt2', label: 'Blue' },
-                { id: 'opt3', label: 'Green' },
+                { id: 'opt1', label: 'English' },
+                { id: 'opt2', label: 'Chinese' },
             ]
+        }
+    },
+    {
+        id: 'english',
+        type: 'normalNode',
+        position: { x: 1000, y: 250 },
+        data: {
+            label: 'English',
+        }
+    },
+    {
+        id: 'chinese',
+        type: 'normalNode',
+        position: { x: 1000, y: 500 },
+        data: {
+            label: 'Chinese',
         }
     }
 ]);
 
 const defaultEdges = ref([
-    { id: 'e1-2', source: '1', target: '2', animated: true },
-    { id: 'e1-3', source: '1', target: '3' },
-    { id: 'e1-4', source: '1', target: '4' },
+    {id: "1-null-question1", type: "default", source: "1", target: "question1"},
+    {id: "question1-answer-opt1-english", type: "default", source: "question1", target: "english", sourceHandle: "answer-opt1"},
+    {id: "question1-answer-opt2-chinese", type: "default", source: "question1", target: "chinese", sourceHandle: "answer-opt2"},
 ]);
 
 const onNodesUpdate = (nodes) => {

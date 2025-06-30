@@ -4,6 +4,12 @@
         :data="data"
         class="qna-node"
     >
+        <div
+            v-if="data && data.content"
+            class="w-full py-3"
+        >
+            {{ data?.content}}
+        </div>
         <div v-for="(opt) in data.options" :key="opt.id" class="flex justify-between items-center space-x-2 my-1 relative border border-gray-300 rounded-sm p-2">
             <div>{{ opt.label }}</div>
 
