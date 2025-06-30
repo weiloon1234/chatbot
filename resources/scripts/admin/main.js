@@ -14,6 +14,7 @@ import { Money3Directive } from 'v-money3';
 import 'vue3-carousel/carousel.css';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import "@vue-flow/core/dist/style.css";
 
 import "./css/app.css";
 import './font-awesome.js';

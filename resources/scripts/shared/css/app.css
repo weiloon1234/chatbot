@@ -1,0 +1,18 @@
+.flow-node {
+    @apply bg-white border rounded shadow relative w-[280px];
+}
+.flow-node .flow-node-title {
+    @apply w-full flex justify-between space-x-2 items-center text-lg font-semibold bg-brand-500 p-3 text-white rounded;
+}
+.flow-node .flow-node-content {
+    @apply p-3 rounded;
+}
+.vue-flow__node.selected > .flow-node {
+    @apply border-blue-500;
+}
+.vue-flow__node.draggable > .flow-node > .flow-node-title {
+    @apply cursor-pointer;
+}
+.vue-flow__node-default, .vue-flow__node-input, .vue-flow__node-output {
+    @apply !border-0;
+}

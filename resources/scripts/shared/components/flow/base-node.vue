@@ -1,0 +1,55 @@
+<template>
+    <div class="flow-node">
+        <div
+            class="flow-node-title"
+        >
+            <!-- Node Label -->
+            <div class="font-semibold truncate pr-6">
+                {{ title ?? ' ' }}
+            </div>
+            <!-- Delete Button -->
+            <button
+                @click="deleteNode"
+                class="text-xs bg-red-500 hover:bg-red-600 text-white rounded-sm w-6 h-6 flex items-center justify-center shadow"
+                title="Delete node"
+            >
+                <font-awesome-icon
+                    icon="fas fa-trash"
+                    class="text-white"
+                />
+            </button>
+        </div>
+        <div class="flow-node-content">
+            <slot />
+        </div>
+    </div>
+</template>
+
+<script setup>
+import {inject} from "vue";
+import {useI18n} from "vue-i18n";
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+
+const props = defineProps({
+    title: {
+        type: String,
+        default: 'Node'
+    },
+});
+
+const emit = defineEmits(['delete-node']);
+
+const $i18n = useI18n();
+const $helper = inject('$helper');
+
+const deleteNode = async () => {
+    await $helper.alertConfirm({
+        message: $i18n.t('Confirm delete node x?').toString().replace(/:x/i, props.title),
+        callback: (result) => {
+            if (result.isConfirmed) {
+                emit('delete-node');
+            }
+        }
+    });
+};
+</script>

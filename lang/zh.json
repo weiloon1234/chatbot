@@ -76,6 +76,7 @@
     "Confirm login as this user x?": "确认登入此用户（:x）帐号？",
     "Confirm ban this user x?": "确认封锁此用户（:x）帐号？",
     "Confirm unban this user x?": "确认解封此用户（:x）帐号？",
+    "Confirm delete node x?": "确认删除节点（:x）？",
 
 
     "Transaction top up": "充值",

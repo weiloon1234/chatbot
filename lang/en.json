@@ -51,6 +51,7 @@
     "Confirm login as this user x?": "Confirm login as this user (:x)?",
     "Confirm ban this user x?": "Confirm ban this user (:x)?",
     "Confirm unban this user x?": "Confirm unban this user (:x)?",
+    "Confirm delete node x?": "Confirm delete node :x ?",
 
     "Transaction top up": "Top up",
     "Transaction deposit": "Deposit",
