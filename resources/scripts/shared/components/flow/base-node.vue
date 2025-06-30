@@ -1,11 +1,25 @@
 <template>
     <div class="flow-node">
+        <!-- Top (target) handle -->
+        <Handle
+            v-if="!data?.isFirstNode"
+            type="target"
+            position="top"
+            class="w-3 h-3 bg-blue-500 border-2 border-white rounded-full"
+        />
+
+        <!-- Bottom (source) handle -->
+        <Handle
+            type="source"
+            position="bottom"
+            class="w-3 h-3 bg-blue-500 border-2 border-white rounded-full"
+        />
         <div
             class="flow-node-title"
         >
             <!-- Node Label -->
             <div class="font-semibold truncate pr-6">
-                {{ title ?? ' ' }}
+                {{ data?.label ?? 'Node' }}
             </div>
             <!-- Delete Button -->
             <button
@@ -29,12 +43,14 @@
 import {inject} from "vue";
 import {useI18n} from "vue-i18n";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import {Handle} from "@vue-flow/core";
 
 const props = defineProps({
-    title: {
-        type: String,
-        default: 'Node'
-    },
+    data: {
+        required: false,
+        type: Object,
+        default: () => null,
+    }
 });
 
 const emit = defineEmits(['delete-node']);

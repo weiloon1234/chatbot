@@ -1,6 +1,6 @@
 <template>
     <base-node
-        :title="data.label"
+        :data="data"
         class="node-default"
         @delete-node="deleteNode"
     >

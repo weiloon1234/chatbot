@@ -42,7 +42,7 @@ const props = defineProps({
     targetPosition: String,
 })
 
-const { removeEdges } = useVueFlow()
+const { removeEdges } = useVueFlow();
 
 // Dynamic edge path that updates with node drag
 const edgePath = computed(() => {

@@ -2,13 +2,14 @@
     <vue-flow
         :nodes="localNodes"
         :edges="localEdges"
-        @update:nodes="onNodesChange"
-        @update:edges="onEdgesChange"
         :node-types="nodeTypes"
         :edge-types="edgeTypes"
         :default-viewport="{ zoom: 0.5 }"
         :max-zoom="4"
         :min-zoom="0.1"
+        @update:nodes="onNodesChange"
+        @update:edges="onEdgesChange"
+        @connect="onConnect"
     />
 </template>
 
@@ -38,22 +39,22 @@ const localNodes = ref([...props.nodes]);
 const localEdges = ref([...props.edges]);
 // Watch for external changes and sync
 watch(() => props.nodes, (newVal) => {
-    localNodes.value = [...newVal]
+    localNodes.value = [...newVal];
 });
 
 watch(() => props.edges, (newVal) => {
-    localEdges.value = [...newVal]
+    localEdges.value = [...newVal];
 });
 
 // Emit changes when Vue Flow updates them
 const onNodesChange = (newNodes) => {
-    localNodes.value = newNodes
-    emit('update:nodes', newNodes)
+    localNodes.value = newNodes;
+    emit('update:nodes', newNodes);
 }
 
 const onEdgesChange = (newEdges) => {
-    localEdges.value = newEdges
-    emit('update:edges', newEdges)
+    localEdges.value = newEdges;
+    emit('update:edges', newEdges);
 }
 
 const nodeTypes = {
@@ -62,5 +63,20 @@ const nodeTypes = {
 };
 const edgeTypes = {
     default: markRaw(edgeDefault),
+};
+
+const onConnect = ({ source, target }) => {
+    const newEdge = {
+        id: `e${source}-${target}`,
+        source,
+        target,
+        type: 'default',
+    };
+
+    // Avoid duplicate
+    if (!localEdges.value.find(e => e.source === source && e.target === target)) {
+        localEdges.value.push(newEdge);
+        emit('update:edges', [...localEdges.value]);
+    }
 };
 </script>
