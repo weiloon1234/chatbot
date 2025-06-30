@@ -71,26 +71,27 @@ const edgeTypes = {
 };
 
 const onConnect = ({ source, sourceHandle, target, targetHandle }) => {
-    const newEdge = {
-        source,
-        sourceHandle,
-        target,
-        targetHandle,
-        type: 'default',
-    };
+    const id = sourceHandle
+        ? `${source}-${sourceHandle}-${target}`
+        : `${source}-${target}`;
 
-    if (sourceHandle) {
-        newEdge.id = `${source}-${sourceHandle}-${target}`;
-    } else {
-        newEdge.id = `${source}-${target}`;
-    }
+    const isDuplicate = localEdges.value.some(
+        e =>
+            e.source === source &&
+            e.target === target &&
+            (e.sourceHandle || null) === (sourceHandle || null)
+    );
 
-    // Avoid duplicates (check sourceHandle too)
-    if (
-        !localEdges.value.find(
-            e => e.source === source && e.sourceHandle === sourceHandle && e.target === target
-        )
-    ) {
+    if (!isDuplicate) {
+        const newEdge = {
+            id,
+            source,
+            sourceHandle,
+            target,
+            targetHandle,
+            type: 'default',
+        };
+
         localEdges.value.push(newEdge);
         emit('update:edges', [...localEdges.value]);
     }
