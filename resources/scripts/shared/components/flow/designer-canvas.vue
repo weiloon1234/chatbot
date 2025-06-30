@@ -41,7 +41,6 @@ const localEdges = ref([...props.edges]);
 // Watch for external changes and sync
 watch(() => props.nodes, (newVal) => {
     localNodes.value = [...newVal];
-    console.log('triggered??');
 });
 
 watch(() => props.edges, (newVal) => {
