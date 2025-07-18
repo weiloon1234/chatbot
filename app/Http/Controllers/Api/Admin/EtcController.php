@@ -66,7 +66,7 @@ class EtcController extends Controller
     {
         $rules = [
             'contact_country_id' => ['required', 'exists:countries,id,status,1'],
-            'contact_number' => ['required', 'isContactNumber:' . $request->get('contact_country_id')],
+            'contact_number' => ['required', 'isContactNumber:'.$request->get('contact_country_id')],
             'content' => ['required_without:files', 'nullable', 'string', 'max:5000'],
             'files' => ['required_without:content', 'array'],
             'files.*' => ['file', 'mimes:jpg,jpeg,png,gif,webp,pdf,doc,docx,zip', 'max:20480'],
@@ -90,15 +90,15 @@ class EtcController extends Controller
             $model->message = $request->get('content');
             $model->save();
 
-//            $poll = [
-//                'name' => 'What is your favorite fruit?',
-//                'options' => ['Apple', 'Banana', 'Mango']
-//            ];
-//
-//            $resp = $service->sendMessage(
-//                to: $model->full_contact_number,
-//                poll: $poll
-//            );
+            //            $poll = [
+            //                'name' => 'What is your favorite fruit?',
+            //                'options' => ['Apple', 'Banana', 'Mango']
+            //            ];
+            //
+            //            $resp = $service->sendMessage(
+            //                to: $model->full_contact_number,
+            //                poll: $poll
+            //            );
 
             $resp = $service->sendMessage(
                 to: $model->full_contact_number,

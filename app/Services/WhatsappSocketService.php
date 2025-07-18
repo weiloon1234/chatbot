@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 class WhatsappSocketService
 {
     protected $baseUrl;
+
     protected $sessionId = null;
 
     public function __construct($session_id = null)
@@ -37,10 +38,10 @@ class WhatsappSocketService
             if ($poll && isset($poll['name']) && isset($poll['options']) && is_array($poll['options'])) {
                 $response = $this->getHttpClient()
                     ->post("{$this->baseUrl}/send", [
-                        'sessionId'   => $this->sessionId,
-                        'to'          => $to . '@s.whatsapp.net',
-                        'type'        => 'pollMessage',
-                        'pollName'    => $poll['name'],
+                        'sessionId' => $this->sessionId,
+                        'to' => $to.'@s.whatsapp.net',
+                        'type' => 'pollMessage',
+                        'pollName' => $poll['name'],
                         'pollOptions' => $poll['options'],
                         'multipleAnswers' => $poolMultipleAnswers,
                     ]);
@@ -49,16 +50,16 @@ class WhatsappSocketService
             } elseif ($files && is_array($files)) {
                 $multipart = [
                     ['name' => 'sessionId', 'contents' => $this->sessionId],
-                    ['name' => 'to',        'contents' => $to . '@s.whatsapp.net'],
+                    ['name' => 'to',        'contents' => $to.'@s.whatsapp.net'],
                     ['name' => 'text',      'contents' => $content ?? ''],
                 ];
 
                 foreach ($files as $file) {
                     $multipart[] = [
-                        'name'     => 'files[]',
+                        'name' => 'files[]',
                         'contents' => file_get_contents($file->getRealPath()),
                         'filename' => $file->getClientOriginalName(),
-                        'headers'  => ['Content-Type' => $file->getMimeType()],
+                        'headers' => ['Content-Type' => $file->getMimeType()],
                     ];
                 }
 
@@ -71,8 +72,8 @@ class WhatsappSocketService
                 $response = $this->getHttpClient()
                     ->post("{$this->baseUrl}/send", [
                         'sessionId' => $this->sessionId,
-                        'to'        => $to . '@s.whatsapp.net',
-                        'text'      => $content,
+                        'to' => $to.'@s.whatsapp.net',
+                        'text' => $content,
                     ]);
             }
 
@@ -85,7 +86,7 @@ class WhatsappSocketService
 
             return ['api_success' => false, 'api_message' => $json['error'] ?? 'Failed to send message', 'api_error_code' => $json['error_code'] ?? null];
         } catch (\Exception $e) {
-            return ['api_success' => false, 'api_message' => 'Error: ' . $e->getMessage()];
+            return ['api_success' => false, 'api_message' => 'Error: '.$e->getMessage()];
         }
     }
 
@@ -100,7 +101,7 @@ class WhatsappSocketService
 
             return $json['active'] ?? false;
         } catch (\Exception $e) {
-            return ['api_success' => false, 'api_message' => 'Error: ' . $e->getMessage()];
+            return ['api_success' => false, 'api_message' => 'Error: '.$e->getMessage()];
         }
     }
 
@@ -108,11 +109,11 @@ class WhatsappSocketService
     {
         try {
             $status = $this->checkSession();
-            if (is_array($status) && isset($status['api_success']) && !$status['api_success']) {
+            if (is_array($status) && isset($status['api_success']) && ! $status['api_success']) {
                 return $status; // error from checkSession
             }
 
-            if (!$status) {
+            if (! $status) {
                 return $this->startSession();
             }
 
@@ -122,7 +123,7 @@ class WhatsappSocketService
                 'qr' => null,
             ];
         } catch (\Exception $e) {
-            return ['api_success' => false, 'api_message' => 'Error: ' . $e->getMessage()];
+            return ['api_success' => false, 'api_message' => 'Error: '.$e->getMessage()];
         }
     }
 
@@ -152,7 +153,7 @@ class WhatsappSocketService
                 'qr' => null,
             ];
         } catch (\Exception $e) {
-            return ['api_success' => false, 'is_active' => false, 'api_message' => 'Error: ' . $e->getMessage()];
+            return ['api_success' => false, 'is_active' => false, 'api_message' => 'Error: '.$e->getMessage()];
         }
     }
 
@@ -173,7 +174,7 @@ class WhatsappSocketService
 
             return ['api_success' => false, 'api_message' => 'Failed to disconnect session'];
         } catch (\Exception $e) {
-            return ['api_success' => false, 'api_message' => 'Error: ' . $e->getMessage()];
+            return ['api_success' => false, 'api_message' => 'Error: '.$e->getMessage()];
         }
     }
 }

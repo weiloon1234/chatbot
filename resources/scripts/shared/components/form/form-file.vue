@@ -20,15 +20,19 @@
                     :name="name"
                     :placeholder="placeholder"
                     :multiple="multiple"
+                    :disabled="disabled || readonly"
                     class="w-full sm:text-sm border rounded-md p-2 text-black hidden"
                     :accept="accept"
                     @blur="emit('blur')"
                     @change="fileChanged" />
-                <div class="form-control cursor-pointer" @click="triggerUpload">
+                <div 
+                    class="form-control" 
+                    :class="{ 'cursor-pointer': !(disabled || readonly), 'cursor-not-allowed': disabled || readonly }"
+                    @click="!disabled && !readonly && triggerUpload()">
                     {{ selectText }}
                 </div>
             </div>
-            <span v-if="selectedFile" class="absolute top-1/2 right-4 z-10 -translate-y-1/2 cursor-pointer" @click="clearFile">
+            <span v-if="selectedFile && !disabled && !readonly" class="absolute top-1/2 right-4 z-10 -translate-y-1/2 cursor-pointer" @click="clearFile">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
                     <path

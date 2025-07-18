@@ -247,6 +247,10 @@ const selectedSingleText = computed(() => {
 });
 
 const onSelect = (option) => {
+    if (props.disabled || props.readonly) {
+        return;
+    }
+
     if (props.multiple) {
         handleChange(String(option.value));
     } else {
@@ -263,6 +267,10 @@ const onRemove = (value) => {
 };
 
 const handleChange = (value) => {
+    if (props.disabled || props.readonly) {
+        return;
+    }
+
     if (props.multiple) {
         let temp = [];
         if (Array.isArray(selectedValues.value)) {
