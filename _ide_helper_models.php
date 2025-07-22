@@ -13,8 +13,6 @@
 
 namespace App\Models{
 /**
- * 
- *
  * @property int $id
  * @property string $model
  * @property int $model_id
@@ -41,8 +39,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
- *
  * @property int $id
  * @property int|null $admin_id
  * @property int|null $user_id
@@ -69,8 +65,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
- *
  * @property int $id
  * @property string $username
  * @property string|null $email
@@ -109,7 +103,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereUsername($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin withoutTrashed()
  * @mixin \Eloquent
  */
@@ -119,8 +113,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
- *
  * @property int $id
  * @property int|null $user_id
  * @property int|null $admin_id
@@ -159,8 +151,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
- *
  * @property int $id
  * @property string $group_name
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -185,8 +175,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
- *
  * @property int $id
  * @property int $admin_group_id
  * @property string $permission_tag
@@ -210,8 +198,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
- *
  * @property int $id
  * @property int|null $sorting
  * @property int|null $article_category_id
@@ -247,7 +233,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Article whereSubjectEn($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Article whereSubjectZh($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Article whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Article withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Article withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Article withoutTrashed()
  * @mixin \Eloquent
  */
@@ -257,8 +243,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
- *
  * @property int $id
  * @property string $name_en
  * @property string $name_zh
@@ -298,8 +282,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
- *
  * @property int $id
  * @property string $operation
  * @property int|null $admin_id
@@ -334,8 +316,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
- *
  * @property int $id
  * @property int|null $country_id
  * @property string $name_en
@@ -358,7 +338,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Bank whereNameEn($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Bank whereNameZh($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Bank whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Bank withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Bank withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Bank withoutTrashed()
  * @mixin \Eloquent
  */
@@ -368,8 +348,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
- *
  * @property mixed $params
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BaseModel newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BaseModel newQuery()
@@ -382,8 +360,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
- *
  * @property int $id
  * @property int|null $bank_id
  * @property int|null $country_id
@@ -411,7 +387,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CompanyBank whereNameEn($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CompanyBank whereNameZh($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CompanyBank whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CompanyBank withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CompanyBank withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CompanyBank withoutTrashed()
  * @mixin \Eloquent
  */
@@ -421,8 +397,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
- *
  * @property int $id
  * @property string $iso2
  * @property string $iso3
@@ -468,8 +442,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
- *
  * @property int $id
  * @property int|null $country_id
  * @property int|null $parent_id
@@ -502,7 +474,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CountryLocation whereParentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CountryLocation whereSorting($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CountryLocation whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CountryLocation withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CountryLocation withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CountryLocation withoutTrashed()
  * @mixin \Eloquent
  */
@@ -512,8 +484,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
- *
  * @property int $id
  * @property string $role
  * @property int|null $user_id
@@ -572,8 +542,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
- *
  * @property int $id
  * @property int|null $deposit_id
  * @property string $file_path
@@ -597,8 +565,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
- *
  * @property int $id
  * @property string|null $tag
  * @property string $title
@@ -622,7 +588,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Page whereTag($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Page whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Page whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Page withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Page withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Page withoutTrashed()
  * @mixin \Eloquent
  */
@@ -632,8 +598,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
- *
  * @property int $id
  * @property string $setting
  * @property string $setting_name
@@ -656,7 +620,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting whereSettingType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting whereSettingValue($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting withoutTrashed()
  * @mixin \Eloquent
  */
@@ -666,8 +630,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
- *
  * @property int $id
  * @property string $username
  * @property string|null $name
@@ -763,8 +725,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
- *
  * @property int $id
  * @property int|null $user_id
  * @property int $credit_type
@@ -796,8 +756,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
- *
  * @property int $id
  * @property int|null $from_user_id
  * @property int|null $to_user_id
@@ -835,8 +793,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
- *
  * @property int $id
  * @property int|null $user_id
  * @property int $user_unilevel
@@ -865,8 +821,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
- *
  * @property int $id
  * @property string|null $admin_id
  * @property string|null $session_id
@@ -901,8 +855,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
- *
  * @property int $id
  * @property string $role
  * @property int|null $user_id

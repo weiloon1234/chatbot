@@ -95,7 +95,15 @@ class BaseModel extends Model
         if (method_exists(get_called_class(), $method)) {
             $arr = $this->$method();
             if (! array_key_exists($value, $arr)) {
-                throw new \Exception(__('Invalid attribute', ['attribute' => $cc]));
+                if (method_exists(get_called_class(), 'ignoreInvalidAttributes')) {
+                    $ignore = $this->ignoreInvalidAttributes();
+                } else {
+                    $ignore = [];
+                }
+
+                if (! in_array($cc, $ignore)) {
+                    throw new \Exception(__('Invalid attribute', ['attribute' => $cc]));
+                }
             }
         }
 
