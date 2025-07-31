@@ -1,7 +1,8 @@
 export default [
-    {name: 'Dashboard', route: 'admin.home'},
+    {name: 'Dashboard', route: 'admin.home', icon: 'fa-home'},
     {
         name: 'User',
+        icon: 'fa-user',
         children: [
             {name: 'Manage user', route: 'admin.user.user.list', permissions: ['Manage user']},
             {name: 'Manage user credit', route: 'admin.user.credit.list', permissions: ['Manage user credit']},
@@ -11,7 +12,7 @@ export default [
     },
     {
         name: 'Article',
-        icon: 'menu',
+        icon: 'fa-book',
         children: [
             {name: 'Manage article', route: 'admin.article.article.list', permissions: ['Manage article']},
             {name: 'Manage article category', route: 'admin.article.category.list', permissions: ['Manage article category']},
@@ -19,7 +20,7 @@ export default [
     },
     {
         name: 'Management',
-        icon: 'menu',
+        icon: 'fa-user-secret',
         children: [
             {name: 'Manage admin', route: 'admin.management.admin.list', permissions: ['Manage admin']},
             {name: 'Manage admin group', route: 'admin.management.admin.group.list', permissions: ['Manage admin group']},
@@ -27,7 +28,7 @@ export default [
     },
     {
         name: 'Other',
-        icon: 'menu',
+        icon: 'fa-cogs',
         children: [
             {name: 'Manage setting', route: 'admin.other.setting.list', permissions: ['Manage setting']},
             {name: 'Manage page', route: 'admin.other.page.list', permissions: ['Manage page']},

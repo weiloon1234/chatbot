@@ -88,6 +88,18 @@ const routes = [
                         ],
                     },
                     {
+                        path: 'whatsapp',
+                        component: BlankRouter,
+                        redirect: {name: 'admin.whatsapp.home'},
+                        children: [
+                            {
+                                path: 'home',
+                                name: 'admin.whatsapp.home',
+                                component: () => import('./pages/main/whatsapp/home-page.vue'),
+                            }
+                        ],
+                    },
+                    {
                         path: 'other',
                         component: BlankRouter,
                         redirect: {name: 'admin.other.setting.list'},
@@ -146,11 +158,6 @@ const routes = [
                         name: 'admin.etc.logs',
                         component: () => import('./pages/main/etc/logs-page.vue'),
                     },
-                    {
-                        path: 'whatsapp',
-                        name: 'admin.etc.whatsapp',
-                        component: () => import('./pages/main/etc/whatsapp-page.vue'),
-                    }
                 ],
             },
             {

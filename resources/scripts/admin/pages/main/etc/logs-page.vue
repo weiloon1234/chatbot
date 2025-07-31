@@ -37,7 +37,7 @@ onMounted(async () => {
 
 const onCleanUp = async () => {
     pageReady.value = false;
-    const data = await axios.post('/etc/clear');
+    const data = await axios.post('/etc/clear_log');
     await $helper.alertSuccess({
         message: data.message,
         callback: async () => {

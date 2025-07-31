@@ -6,12 +6,8 @@
             v-if="hasHeader"
             class="flex flex-col gap-2 mb-4 sm:flex-row sm:items-center sm:justify-between"
         >
-            <div>
-                <slot name="title" />
-            </div>
-            <div>
-                <slot name="tools" />
-            </div>
+            <slot name="title" />
+            <slot name="tools" />
         </div>
         <div class="max-w-full overflow-x-auto custom-scrollbar">
             <slot />

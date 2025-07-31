@@ -360,6 +360,56 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * @property string $id
+ * @property string $channel
+ * @property string $direction
+ * @property string|null $from_id
+ * @property string|null $from_name
+ * @property string|null $to_id
+ * @property string|null $to_name
+ * @property array<array-key, mixed> $message
+ * @property array<array-key, mixed>|null $raw_payload
+ * @property string|null $type
+ * @property string $status
+ * @property \Illuminate\Support\Carbon|null $sent_at
+ * @property \Illuminate\Support\Carbon|null $received_at
+ * @property string|null $external_message_id
+ * @property array<array-key, mixed>|null $response
+ * @property string|null $reference_number
+ * @property string|null $ip_address
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property mixed $params
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BotMessage newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BotMessage newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BotMessage query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BotMessage whereChannel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BotMessage whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BotMessage whereDirection($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BotMessage whereExternalMessageId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BotMessage whereFromId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BotMessage whereFromName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BotMessage whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BotMessage whereIpAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BotMessage whereMessage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BotMessage whereRawPayload($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BotMessage whereReceivedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BotMessage whereReferenceNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BotMessage whereResponse($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BotMessage whereSentAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BotMessage whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BotMessage whereToId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BotMessage whereToName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BotMessage whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BotMessage whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	#[\AllowDynamicProperties]
+	class IdeHelperBotMessage {}
+}
+
+namespace App\Models{
+/**
  * @property int $id
  * @property int|null $bank_id
  * @property int|null $country_id
@@ -817,40 +867,6 @@ namespace App\Models{
  */
 	#[\AllowDynamicProperties]
 	class IdeHelperUserUnilevel {}
-}
-
-namespace App\Models{
-/**
- * @property int $id
- * @property string|null $admin_id
- * @property string|null $session_id
- * @property int|null $contact_country_id
- * @property string|null $contact_number
- * @property string|null $full_contact_number
- * @property string|null $message
- * @property string|null $ip_address
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Admin|null $admin
- * @property-read \App\Models\Country|null $contactCountry
- * @property mixed $params
- * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage whereAdminId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage whereContactCountryId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage whereContactNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage whereFullContactNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage whereIpAddress($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage whereMessage($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage whereSessionId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage whereUpdatedAt($value)
- * @mixin \Eloquent
- */
-	#[\AllowDynamicProperties]
-	class IdeHelperWhatsappMessage {}
 }
 
 namespace App\Models{

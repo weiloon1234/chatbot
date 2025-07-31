@@ -2,9 +2,8 @@
     <aside
         class="sidebar fixed top-0 left-0 z-999 flex h-screen w-[290px] flex-col overflow-y-auto border-r border-gray-200 bg-white px-5 transition-all duration-300 lg:static lg:translate-x-0 dark:border-gray-800 dark:bg-black"
         :class="{
-            'translate-x-0 lg:w-[90px]':
-                $windowState.$isMobile && sideBarOpened && false,
-            '-translate-x-full': $windowState.$isMobile && !sideBarOpened,
+            'lg:w-[90px] sidebar-off': !sideBarOpened,
+            '-translate-x-full': $windowState.$isMobile.value && !sideBarOpened,
         }"
         v-click-outside="onOutsideClick"
     >
@@ -13,10 +12,10 @@
         >
             <router-link
                 :to="{ name: 'admin.home' }"
-                class="flex justify-center items-center space-x-2"
+                class="flex justify-center items-center space-x-1"
             >
                 <img src="/logo.png" class="h-8 w-auto" alt="Logo" />
-                <span class="uppercase text-lg">{{ $appName }}</span>
+                <span class="uppercase text-lg hide-when-sidebar-off">{{ $appName }}</span>
             </router-link>
         </div>
         <div
@@ -27,7 +26,7 @@
                     <h3
                         class="mb-4 text-xs leading-[20px] text-gray-400 uppercase"
                     >
-                        <span class="menu-group-title">
+                        <span class="menu-group-title hide-when-sidebar-off">
                             {{ $t("Menu") }}
                         </span>
                         <svg
@@ -60,27 +59,25 @@
                                 ]"
                                 @click.prevent="toggleParent(parent.name)"
                             >
-                                <svg
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
+                                <font-awesome-icon
+                                    :icon="['fas', parent.icon]"
+                                    size="xl"
                                     :class="[
                                         isParentActive(parent) ? 'menu-item-icon-active' : 'menu-item-icon-inactive'
                                     ]"
-                                >
-                                    <path
-                                        fill-rule="evenodd"
-                                        clip-rule="evenodd"
-                                        d="M5.5 3.25C4.25736 3.25 3.25 4.25736 3.25 5.5V8.99998C3.25 10.2426 4.25736 11.25 5.5 11.25H9C10.2426 11.25 11.25 10.2426 11.25 8.99998V5.5C11.25 4.25736 10.2426 3.25 9 3.25H5.5ZM4.75 5.5C4.75 5.08579 5.08579 4.75 5.5 4.75H9C9.41421 4.75 9.75 5.08579 9.75 5.5V8.99998C9.75 9.41419 9.41421 9.74998 9 9.74998H5.5C5.08579 9.74998 4.75 9.41419 4.75 8.99998V5.5ZM5.5 12.75C4.25736 12.75 3.25 13.7574 3.25 15V18.5C3.25 19.7426 4.25736 20.75 5.5 20.75H9C10.2426 20.75 11.25 19.7427 11.25 18.5V15C11.25 13.7574 10.2426 12.75 9 12.75H5.5ZM4.75 15C4.75 14.5858 5.08579 14.25 5.5 14.25H9C9.41421 14.25 9.75 14.5858 9.75 15V18.5C9.75 18.9142 9.41421 19.25 9 19.25H5.5C5.08579 19.25 4.75 18.9142 4.75 18.5V15ZM12.75 5.5C12.75 4.25736 13.7574 3.25 15 3.25H18.5C19.7426 3.25 20.75 4.25736 20.75 5.5V8.99998C20.75 10.2426 19.7426 11.25 18.5 11.25H15C13.7574 11.25 12.75 10.2426 12.75 8.99998V5.5ZM15 4.75C14.5858 4.75 14.25 5.08579 14.25 5.5V8.99998C14.25 9.41419 14.5858 9.74998 15 9.74998H18.5C18.9142 9.74998 19.25 9.41419 19.25 8.99998V5.5C19.25 5.08579 18.9142 4.75 18.5 4.75H15ZM15 12.75C13.7574 12.75 12.75 13.7574 12.75 15V18.5C12.75 19.7426 13.7574 20.75 15 20.75H18.5C19.7426 20.75 20.75 19.7427 20.75 18.5V15C20.75 13.7574 19.7426 12.75 18.5 12.75H15ZM14.25 15C14.25 14.5858 14.5858 14.25 15 14.25H18.5C18.9142 14.25 19.25 14.5858 19.25 15V18.5C19.25 18.9142 18.9142 19.25 18.5 19.25H15C14.5858 19.25 14.25 18.9142 14.25 18.5V15Z"
-                                        fill="currentColor"
-                                    ></path>
-                                </svg>
-                                <span class="menu-item-text capitalize"> {{ $t(parent.name) }} </span>
+                                />
+                                <span class="menu-item-text capitalize hide-when-sidebar-off"> {{ $t(parent.name) }} </span>
                                 <span
                                     v-if="parent.totalNotification > 0"
-                                    class="bg-red-500 text-white aspect-square rounded-md px-2 text-xs flex flex-col items-center justify-center"
+                                    class="bg-red-500 text-white aspect-square rounded-md px-2 text-xs flex flex-col items-center justify-center hide-when-sidebar-off"
+                                >
+                                    <span>
+                                        {{ parent.totalNotification }}
+                                    </span>
+                                </span>
+                                <span
+                                    v-if="parent.totalNotification > 0"
+                                    class="bg-red-500 text-white aspect-square rounded-md px-1 text-xs flex flex-col items-center justify-center floating-notification"
                                 >
                                     <span>
                                         {{ parent.totalNotification }}
@@ -95,7 +92,7 @@
                                         viewBox="0 0 20 20"
                                         fill="none"
                                         xmlns="http://www.w3.org/2000/svg"
-                                        class="menu-item-arrow"
+                                        class="menu-item-arrow hide-when-sidebar-off"
                                         :class="[
                                             isParentExpanded(parent.name) ? 'menu-item-arrow-active' : 'menu-item-arrow-inactive'
                                         ]"
@@ -119,24 +116,14 @@
                                 ]"
                                 @click="handleMenuClicked"
                             >
-                                <svg
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
+                                <font-awesome-icon
+                                    :icon="['fas', parent.icon]"
+                                    size="xl"
                                     :class="[
                                         isParentExpanded(parent.name) ? 'menu-item-icon-active' : 'menu-item-icon-inactive'
                                     ]"
-                                >
-                                    <path
-                                        fill-rule="evenodd"
-                                        clip-rule="evenodd"
-                                        d="M5.5 3.25C4.25736 3.25 3.25 4.25736 3.25 5.5V8.99998C3.25 10.2426 4.25736 11.25 5.5 11.25H9C10.2426 11.25 11.25 10.2426 11.25 8.99998V5.5C11.25 4.25736 10.2426 3.25 9 3.25H5.5ZM4.75 5.5C4.75 5.08579 5.08579 4.75 5.5 4.75H9C9.41421 4.75 9.75 5.08579 9.75 5.5V8.99998C9.75 9.41419 9.41421 9.74998 9 9.74998H5.5C5.08579 9.74998 4.75 9.41419 4.75 8.99998V5.5ZM5.5 12.75C4.25736 12.75 3.25 13.7574 3.25 15V18.5C3.25 19.7426 4.25736 20.75 5.5 20.75H9C10.2426 20.75 11.25 19.7427 11.25 18.5V15C11.25 13.7574 10.2426 12.75 9 12.75H5.5ZM4.75 15C4.75 14.5858 5.08579 14.25 5.5 14.25H9C9.41421 14.25 9.75 14.5858 9.75 15V18.5C9.75 18.9142 9.41421 19.25 9 19.25H5.5C5.08579 19.25 4.75 18.9142 4.75 18.5V15ZM12.75 5.5C12.75 4.25736 13.7574 3.25 15 3.25H18.5C19.7426 3.25 20.75 4.25736 20.75 5.5V8.99998C20.75 10.2426 19.7426 11.25 18.5 11.25H15C13.7574 11.25 12.75 10.2426 12.75 8.99998V5.5ZM15 4.75C14.5858 4.75 14.25 5.08579 14.25 5.5V8.99998C14.25 9.41419 14.5858 9.74998 15 9.74998H18.5C18.9142 9.74998 19.25 9.41419 19.25 8.99998V5.5C19.25 5.08579 18.9142 4.75 18.5 4.75H15ZM15 12.75C13.7574 12.75 12.75 13.7574 12.75 15V18.5C12.75 19.7426 13.7574 20.75 15 20.75H18.5C19.7426 20.75 20.75 19.7427 20.75 18.5V15C20.75 13.7574 19.7426 12.75 18.5 12.75H15ZM14.25 15C14.25 14.5858 14.5858 14.25 15 14.25H18.5C18.9142 14.25 19.25 14.5858 19.25 15V18.5C19.25 18.9142 18.9142 19.25 18.5 19.25H15C14.5858 19.25 14.25 18.9142 14.25 18.5V15Z"
-                                        fill="currentColor"
-                                    ></path>
-                                </svg>
-                                <span class="menu-item-text capitalize flex-1">
+                                />
+                                <span class="menu-item-text capitalize flex-1 hide-when-sidebar-off">
                                     <span class="w-full flex justify-between space-x-2 items-center">
                                         <span class="flex-1">
                                             {{ $t(parent.name) }}
@@ -151,6 +138,14 @@
                                         </span>
                                     </span>
                                 </span>
+                                <span
+                                    v-if="parent.notification && notifications[parent.notification] && parseInt(notifications[parent.notification]) > 0"
+                                    class="bg-red-500 text-white aspect-square rounded-md px-1 text-xs flex flex-col items-center justify-center floating-notification"
+                                >
+                                    <span>
+                                        {{ notifications[parent.notification] }}
+                                    </span>
+                                </span>
                             </router-link>
                             <div
                                 v-if="parent.children?.length"
@@ -159,7 +154,7 @@
                                      isParentExpanded(parent.name) ? 'block' : 'hidden'
                                 ]"
                             >
-                                <ul class="menu-dropdown mt-2 flex flex-col gap-1 pl-9">
+                                <ul class="menu-dropdown mt-2 flex flex-col gap-1 pl-9 hide-when-sidebar-off">
                                     <li
                                         v-for="(child, index) in parent.children"
                                         :key="`child-${index}`"
@@ -172,7 +167,7 @@
                                             ]"
                                             @click="handleMenuClicked"
                                         >
-                                            <span class="w-full flex justify-between space-x-2 items-center">
+                                            <span class="w-full flex justify-between space-x-2 items-center hide-when-sidebar-off">
                                                 <span class="flex-1">
                                                     {{ $t(child.name) }}
                                                 </span>
@@ -324,13 +319,13 @@ const onOutsideClick = (event) => {
         return;
     }
 
-    if (props.sideBarOpened) {
+    if (props.sideBarOpened && $windowState.$isMobile.value) {
         emit("on-toggle-side-bar");
     }
 };
 
 const handleMenuClicked = () => {
-    if (props.sideBarOpened) {
+    if ($windowState.$isMobile.value) {
         emit("on-toggle-side-bar");
     }
 };

@@ -19,7 +19,7 @@
             />
             <div
                 id="main-content-container"
-                class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6"
+                class="p-4 mx-auto max-w-(--breakpoint-4xl) md:p-6"
             >
                 <router-view />
             </div>

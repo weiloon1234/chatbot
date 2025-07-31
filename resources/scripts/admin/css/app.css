@@ -951,3 +951,25 @@ input[type='number'] {
 .listbox-option-container {
     z-index: 90002 !important;
 }
+aside.sidebar-off:not(:hover) .hide-when-sidebar-off {
+    display: none;
+}
+aside.sidebar-off:not(:hover) {
+    @apply w-[90px];
+}
+aside.sidebar-off:is(:hover) {
+    @apply w-[290px];
+}
+.floating-notification {
+    display: none;
+}
+aside.sidebar-off:not(:hover) .floating-notification {
+    @apply absolute top-0 right-0 -translate-x-1/2 z-10;
+    display: block;
+}
+aside.sidebar-off:not(:hover) .menu-item {
+    @apply justify-center items-center;
+}
+.svg-inline--fa.item-icon-active {
+    fill: var(--color-brand-500);
+}

@@ -75,10 +75,12 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/profile_submit', [\App\Http\Controllers\Api\Admin\AccountController::class, 'profileSubmit']);
     Route::post('/security_submit', [\App\Http\Controllers\Api\Admin\AccountController::class, 'securitySubmit']);
 
-    Route::post('/etc/check_whatsapp', [\App\Http\Controllers\Api\Admin\EtcController::class, 'checkWhatsapp']);
-    Route::post('/etc/check_whatsapp_status', [\App\Http\Controllers\Api\Admin\EtcController::class, 'checkWhatsappStatus']);
-    Route::post('/etc/disconnect_whatsapp', [\App\Http\Controllers\Api\Admin\EtcController::class, 'disconnectWhatsapp']);
-    Route::post('/etc/send_message_whatsapp', [\App\Http\Controllers\Api\Admin\EtcController::class, 'sendMessageWhatsapp']);
-    Route::post('/etc/load_log', [\App\Http\Controllers\Api\Admin\EtcController::class, 'loadLog']);
-    Route::post('/etc/clear', [\App\Http\Controllers\Api\Admin\EtcController::class, 'clear'])->block();
+    Route::any('/etc/load_log', [\App\Http\Controllers\Api\Admin\EtcController::class, 'loadLog']);
+    Route::any('/etc/clear_log', [\App\Http\Controllers\Api\Admin\EtcController::class, 'clearLog']);
+
+    Route::any('/whatsapp/sessions/status', [\App\Http\Controllers\Api\Admin\WhatsAppController::class, 'checkStatus']);
+    Route::any('/whatsapp/sessions/start', [\App\Http\Controllers\Api\Admin\WhatsAppController::class, 'startSession']);
+    Route::any('/whatsapp/sessions/terminate', [\App\Http\Controllers\Api\Admin\WhatsAppController::class, 'terminateSession']);
+    Route::any('/whatsapp/messages/send', [\App\Http\Controllers\Api\Admin\WhatsAppController::class, 'sendMessage']);
+    Route::any('/whatsapp/disconnect', [\App\Http\Controllers\Api\Admin\WhatsAppController::class, 'disconnectWhatsapp']);
 });

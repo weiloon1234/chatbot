@@ -10,7 +10,7 @@
             >
                 <button
                     type="button"
-                    class="z-999 flex h-10 w-10 items-center justify-center rounded-lg border-gray-200 text-gray-500 dark:border-gray-800 dark:text-gray-400 lg:hidden sidebar-toggle-button"
+                    class="z-999 flex h-10 w-10 items-center justify-center rounded-lg border-gray-200 text-gray-500 dark:border-gray-800 dark:text-gray-400 lg:h-11 lg:w-11 lg:border sidebar-toggle-button"
                     :class="[
                         sideBarOpened
                             ? 'lg:bg-transparent dark:lg:bg-transparent bg-gray-100 dark:bg-gray-800'
@@ -68,7 +68,7 @@
                 </button>
                 <router-link
                     :to="{ name: 'admin.home' }"
-                    class="lg:hidden flex justify-center items-center space-x-2"
+                    class="lg:hidden flex justify-center items-center space-x-1"
                 >
                     <img src="/logo.png" class="h-8 w-auto" alt="Logo" />
                     <span class="uppercase text-lg">{{ $appName }}</span>

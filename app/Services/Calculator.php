@@ -6,46 +6,47 @@ use App\Config;
 
 class Calculator
 {
-    public function __construct(public float $number, public int $decimal = Config::DECIMAL_POINT) {}
+    public function __construct(public string|float|int $number, public int $decimal = Config::CALCULATOR_DECIMAL_POINT)
+    {
+        $this->number = $this->format($this->number);
+    }
 
     public function setDecimal(int $decimal): void
     {
         $this->decimal = $decimal;
     }
 
-    public function plus(float|int $num): self
+    public function plus(float|int|string $num): self
     {
-        $this->number = bcadd($this->number, $num, $this->decimal);
+        $this->number = bcadd($this->number, $this->format($num), $this->decimal);
 
         return $this;
     }
 
-    public function minus(float|int $num): self
+    public function minus(float|int|string $num): self
     {
-        $this->number = bcsub($this->number, $num, $this->decimal);
+        $this->number = bcsub($this->number, $this->format($num), $this->decimal);
 
         return $this;
     }
 
-    public function times(float|int $num): self
+    public function times(float|int|string $num): self
     {
-        $this->number = bcmul($this->number, $num, $this->decimal);
+        $this->number = bcmul($this->number, $this->format($num), $this->decimal);
 
         return $this;
     }
 
-    public function divide(float|int $num): self
+    public function divide(float|int|string $num): self
     {
-        $this->number = bcdiv($this->number, $num, $this->decimal);
+        $this->number = bcdiv($this->number, $this->format($num), $this->decimal);
 
         return $this;
     }
 
-    public function percentage(float|int $percentage): self
+    public function percentage(float|int|string $percentage): self
     {
-        $this->divide(100)->times($percentage);
-
-        return $this;
+        return $this->divide(100)->times($percentage);
     }
 
     public function getDecimal(): int
@@ -53,33 +54,38 @@ class Calculator
         return $this->decimal;
     }
 
-    public function getNumber(): float|int
+    public function getNumber(): string
     {
         return $this->number;
     }
 
-    public function getAnswer(): float|int
+    public function getAnswer(): float
     {
-        return $this->getNumber();
+        return (float) $this->number;
     }
 
     public function __toString(): string
     {
-        return $this->getAnswer();
+        return $this->number;
     }
 
     public function __toInt(): int
     {
-        return $this->getAnswer();
+        return (int) $this->number;
     }
 
     public function __toNumber(): float
     {
+        return (float) $this->number;
+    }
+
+    public function __invoke(...$values): float
+    {
         return $this->getAnswer();
     }
 
-    public function __invoke(...$values): int|float
+    private function format(float|int|string $num): string
     {
-        return $this->getAnswer();
+        return sprintf('%.'.$this->decimal.'f', (float) $num);
     }
 }
