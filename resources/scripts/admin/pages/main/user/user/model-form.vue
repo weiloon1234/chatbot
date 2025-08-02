@@ -46,23 +46,22 @@
                 <form-pin v-model="formState.new_password2_confirmation" :errors="formError.new_password2_confirmation" :label="$t('New password2 confirmation')" />
             </div>
         </template>
-        <teleport to="#modal-footer">
-            <div class="grid grid-cols-2 gap-4">
-                <auto-button
-                    :busy="formBusy"
-                    @click="onSubmitForm"
-                >
-                    {{ $t('Submit') }}
-                </auto-button>
-                <auto-button
-                    type="plain"
-                    :busy="formBusy"
-                    @click="emit('close')"
-                >
-                    {{ $t('Cancel') }}
-                </auto-button>
-            </div>
-        </teleport>
+        <!-- Footer buttons - using reusable modal-footer class -->
+        <div class="modal-footer grid grid-cols-2 gap-4">
+            <auto-button
+                type="plain"
+                :busy="formBusy"
+                @click="emit('close')"
+            >
+                {{ $t('Cancel') }}
+            </auto-button>
+            <auto-button
+                :busy="formBusy"
+                @click="onSubmitForm"
+            >
+                {{ $t('Submit') }}
+            </auto-button>
+        </div>
     </div>
 </template>
 

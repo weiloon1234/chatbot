@@ -2,7 +2,6 @@
 layer(base);
 
 @import 'tailwindcss';
-@import '../../shared/css/app.css';
 @plugin "flowbite-typography";
 
 @custom-variant dark (&:is(.dark *));
@@ -972,4 +971,14 @@ aside.sidebar-off:not(:hover) .menu-item {
 }
 .svg-inline--fa.item-icon-active {
     fill: var(--color-brand-500);
+}
+
+/* Modal Footer Utilities */
+@utility modal-footer {
+    @apply pt-6 mt-6 border-t border-gray-200 sticky bottom-0 bg-white -mx-4 -mb-4 px-4 py-4 rounded-b-xl;
+}
+
+/* Auto-adjust modal content padding when footer is present */
+.dialog-description:has(.modal-footer) {
+    @apply pb-0;
 }

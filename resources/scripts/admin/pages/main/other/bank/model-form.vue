@@ -10,23 +10,22 @@
             :errors="formError[`name_${l}`]" :label="`${$t('Name')} (${$t(`Locale ${l}`)})`"
         />
         <form-select v-model="formState.country_id" :errors="formError.country_id" :label="$t('Country')" :options="countries" />
-        <teleport to="#modal-footer">
-            <div class="grid grid-cols-2 gap-4">
-                <auto-button
-                    :busy="formBusy"
-                    @click="onSubmitForm"
-                >
-                    {{ $t('Submit') }}
-                </auto-button>
-                <auto-button
-                    type="plain"
-                    :busy="formBusy"
-                    @click="emit('close')"
-                >
-                    {{ $t('Cancel') }}
-                </auto-button>
-            </div>
-        </teleport>
+        <!-- Footer buttons - using reusable modal-footer class -->
+        <div class="modal-footer grid grid-cols-2 gap-4">
+            <auto-button
+                type="plain"
+                :busy="formBusy"
+                @click="emit('close')"
+            >
+                {{ $t('Cancel') }}
+            </auto-button>
+            <auto-button
+                :busy="formBusy"
+                @click="onSubmitForm"
+            >
+                {{ $t('Submit') }}
+            </auto-button>
+        </div>
     </div>
 </template>
 

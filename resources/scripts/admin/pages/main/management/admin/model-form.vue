@@ -13,23 +13,22 @@
         </template>
         <form-password v-model="formState.password" :errors="formError.password" :label="$t('Password')" :placeholder="model?.id ? $t('Leave blank if not changing') : ''" />
         <form-password v-model="formState.password_confirmation" :errors="formError.password_confirmation" :label="$t('Password confirmation')" :placeholder="model?.id ? $t('Leave blank if not changing') : ''" />
-        <teleport to="#modal-footer">
-            <div class="grid grid-cols-2 gap-4">
-                <auto-button
-                    :busy="formBusy"
-                    @click="onSubmitForm"
-                >
-                    {{ $t('Submit') }}
-                </auto-button>
-                <auto-button
-                    type="plain"
-                    :busy="formBusy"
-                    @click="emit('close')"
-                >
-                    {{ $t('Cancel') }}
-                </auto-button>
-            </div>
-        </teleport>
+        <!-- Footer buttons - using reusable modal-footer class -->
+        <div class="modal-footer grid grid-cols-2 gap-4">
+            <auto-button
+                type="plain"
+                :busy="formBusy"
+                @click="emit('close')"
+            >
+                {{ $t('Cancel') }}
+            </auto-button>
+            <auto-button
+                :busy="formBusy"
+                @click="onSubmitForm"
+            >
+                {{ $t('Submit') }}
+            </auto-button>
+        </div>
     </div>
 </template>
 

@@ -39,18 +39,7 @@
                 </tr>
             </template>
         </auto-datatable>
-        <auto-modal
-            v-if="formOpened"
-            small
-            @close="onFormClose"
-        >
-            <model-form
-                :model="model"
-                @close="onFormClose"
-                @success="onFormClose"
-            />
-        </auto-modal>
-    </div>
+        </div>
 </template>
 
 <script setup>
@@ -64,17 +53,18 @@ import ModelForm from "./model-form.vue";
 
 const $i18n = useI18n();
 const $helper = inject('$helper');
+const $modalStore = inject('$modalStore');
 
 const dt = ref();
-const model = ref(null);
-const formOpened = ref(false);
+
 const onFormOpen = (m = null) => {
-    model.value = m;
-    formOpened.value = true;
+    $modalStore.open(ModelForm, { model: m }, { 
+        title: m ? 'View Audit Trail' : 'Audit Trail Details' 
+    });
 };
+
 const onFormClose = () => {
-    model.value = null;
-    formOpened.value = false;
+    $modalStore.close();
     dt.value.fetchData();
 };
 </script>

@@ -52,12 +52,22 @@
                 :errors="formError[`cover_${l}`]" :label="`${$t('Cover image')} (${$t(`Locale ${l}`)})`"
                 :preview-file="model?.[`cover_${l}`]"
             />
-            <auto-button
-                :busy="formBusy"
-                @click="onSubmitForm"
-            >
-                {{ $t('Submit') }}
-            </auto-button>
+            <!-- Footer buttons - using reusable modal-footer class -->
+            <div class="modal-footer grid grid-cols-2 gap-4">
+                <auto-button
+                    type="plain"
+                    :busy="formBusy"
+                    @click="$router.push({ name: 'admin.article.article.list' })"
+                >
+                    {{ $t('Cancel') }}
+                </auto-button>
+                <auto-button
+                    :busy="formBusy"
+                    @click="onSubmitForm"
+                >
+                    {{ $t('Submit') }}
+                </auto-button>
+            </div>
         </div>
     </admin-content-card>
 </template>

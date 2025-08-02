@@ -12,12 +12,22 @@
                 v-model="formState[`content_${l}`]"
                 :errors="formError[`content_${l}`]" :label="`${$t('Content')} (${$t(`Locale ${l}`)})`"
             />
-            <auto-button
-                :busy="formBusy"
-                @click="onSubmitForm"
-            >
-                {{ $t('Submit') }}
-            </auto-button>
+            <!-- Footer buttons - using reusable modal-footer class -->
+            <div class="modal-footer grid grid-cols-2 gap-4">
+                <auto-button
+                    type="plain"
+                    :busy="formBusy"
+                    @click="$router.push({ name: 'admin.other.page.list' })"
+                >
+                    {{ $t('Cancel') }}
+                </auto-button>
+                <auto-button
+                    :busy="formBusy"
+                    @click="onSubmitForm"
+                >
+                    {{ $t('Submit') }}
+                </auto-button>
+            </div>
         </div>
     </admin-content-card>
 </template>

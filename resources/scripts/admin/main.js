@@ -14,7 +14,6 @@ import { Money3Directive } from 'v-money3';
 import 'vue3-carousel/carousel.css';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import 'sweetalert2/dist/sweetalert2.min.css';
-import "@vue-flow/core/dist/style.css";
 
 import "./css/app.css";
 import './font-awesome.js';
@@ -25,6 +24,7 @@ import i18n from './i18n.js';
 import useAdminStore from "#/admin/stores/admin-store.js";
 import useAdminSettingStore from "#/admin/stores/setting-store.js";
 import useAdminLocaleStore from "#/admin/stores/locale-store.js";
+import useAdminModalStore from "#/admin/stores/modal-store.js";
 
 const role = 'admin';
 const api_url = `${window.location.origin}/api/${role}`;
@@ -62,6 +62,10 @@ const helpers = {
         app.localeStore = useAdminLocaleStore();
         app.provide('$localeStore', app.localeStore);
         app.config.globalProperties.$localeStore = app.localeStore;
+
+        app.modalStore = useAdminModalStore();
+        app.provide('$modalStore', app.modalStore);
+        app.config.globalProperties.$modalStore = app.modalStore;
 
         app.role = role;
         app.provide('$role', role);

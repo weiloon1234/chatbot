@@ -262,20 +262,8 @@
                 </div>
             </div>
         </div>
-        <auto-modal
-            v-if="profileFormOpened"
-            small
-            @close="profileFormOpened = false"
-        >
-            <profile-form @success="profileFormOpened = false" @close="profileFormOpened = false" />
-        </auto-modal>
-        <auto-modal
-            v-if="securityFormOpened"
-            small
-            @close="securityFormOpened = false"
-        >
-            <security-form @success="securityFormOpened = false" @close="securityFormOpened = false" />
-        </auto-modal>
+        <!-- Store-based modals -->
+        <auto-modal v-if="$modalStore.isOpen" />
     </header>
 </template>
 
@@ -302,10 +290,12 @@ const emit = defineEmits(["on-toggle-side-bar", "on-toggle-menu-bar"]);
 const $helper = inject("$helper");
 const $router = useRouter();
 const $accountStore = inject("$accountStore");
+const $modalStore = inject("$modalStore");
+if (!$modalStore) {
+    throw new Error('Modal store is required. Please provide $modalStore via injection.');
+}
 
 const dropDownOpened = ref(false);
-const profileFormOpened = ref(false);
-const securityFormOpened = ref(false);
 
 const onOutsideClick = (event) => {
     if ($helper.hasClassOrAncestor(event.target, "profile-avatar")) {
@@ -318,14 +308,18 @@ const onOutsideClick = (event) => {
 };
 
 const onProfileFormOpen = () => {
-    securityFormOpened.value = false;
-    profileFormOpened.value = true;
     dropDownOpened.value = false;
+    $modalStore.open(ProfileForm, {}, { 
+        small: true, 
+        title: 'Profile Settings' 
+    });
 };
 const onSecurityFormOpen = () => {
-    profileFormOpened.value = false;
-    securityFormOpened.value = true;
     dropDownOpened.value = false;
+    $modalStore.open(SecurityForm, {}, { 
+        small: true, 
+        title: 'Security Settings' 
+    });
 };
 
 const avatarInitials = computed(() => {

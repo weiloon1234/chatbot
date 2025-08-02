@@ -18,7 +18,6 @@
                 @on-toggle-menu-bar="onToggleMenuBar"
             />
             <div
-                id="main-content-container"
                 class="p-4 mx-auto max-w-(--breakpoint-4xl) md:p-6"
             >
                 <router-view />

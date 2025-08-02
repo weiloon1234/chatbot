@@ -8,23 +8,22 @@
         <form-input v-model="formState.name" :errors="formError.name" :label="$t('Name')" readonly disabled />
         <form-input v-model="formState.phone_code" :errors="formError.phone_code" :label="$t('Phone code')" readonly disabled />
         <form-input v-model="formState.rate_to_base" :errors="formError.rate_to_base" :label="$t('Rate to base')" fund />
-        <teleport to="#modal-footer">
-            <div class="grid grid-cols-2 gap-4">
-                <auto-button
-                    :busy="formBusy"
-                    @click="onSubmitForm"
-                >
-                    {{ $t('Submit') }}
-                </auto-button>
-                <auto-button
-                    type="plain"
-                    :busy="formBusy"
-                    @click="emit('close')"
-                >
-                    {{ $t('Cancel') }}
-                </auto-button>
-            </div>
-        </teleport>
+        <!-- Footer buttons - using reusable modal-footer class -->
+        <div class="modal-footer grid grid-cols-2 gap-4">
+            <auto-button
+                type="plain"
+                :busy="formBusy"
+                @click="emit('close')"
+            >
+                {{ $t('Cancel') }}
+            </auto-button>
+            <auto-button
+                :busy="formBusy"
+                @click="onSubmitForm"
+            >
+                {{ $t('Submit') }}
+            </auto-button>
+        </div>
     </div>
 </template>
 

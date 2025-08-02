@@ -26,23 +26,22 @@
         <form-select v-model="formState.credit_type" :errors="formError.credit_type" :label="$t('Credit')" :options="$helper.getEnumOptions('AdminAdjustUserCredit.credit_type')" :disabled="isRead" />
         <form-input v-model="formState.amount" :errors="formError.amount" :label="$t('Amount')" fund :disabled="isRead" />
         <form-textarea v-model="formState.remark" :errors="formError.remark" :label="$t('Remark')" :disabled="isRead" />
-        <teleport to="#modal-footer">
-            <div v-if="!isRead" class="grid grid-cols-2 gap-4">
-                <auto-button
-                    :busy="formBusy"
-                    @click="onSubmitForm"
-                >
-                    {{ $t('Submit') }}
-                </auto-button>
-                <auto-button
-                    type="plain"
-                    :busy="formBusy"
-                    @click="emit('close')"
-                >
-                    {{ $t('Cancel') }}
-                </auto-button>
-            </div>
-        </teleport>
+        <!-- Footer buttons - using reusable modal-footer class -->
+        <div v-if="!isRead" class="modal-footer grid grid-cols-2 gap-4">
+            <auto-button
+                type="plain"
+                :busy="formBusy"
+                @click="emit('close')"
+            >
+                {{ $t('Cancel') }}
+            </auto-button>
+            <auto-button
+                :busy="formBusy"
+                @click="onSubmitForm"
+            >
+                {{ $t('Submit') }}
+            </auto-button>
+        </div>
     </div>
 </template>
 

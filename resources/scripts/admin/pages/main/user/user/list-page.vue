@@ -128,27 +128,6 @@
                 </tr>
             </template>
         </auto-datatable>
-        <auto-modal
-            v-if="formOpened"
-            small
-            @close="onFormClose"
-        >
-            <model-form
-                :model="model"
-                @close="onFormClose"
-                @success="onFormClose"
-            />
-        </auto-modal>
-        <auto-modal
-            v-if="openedTransactions.cid || openedTransactions.userId"
-            :title="openedTransactions.identity"
-            @close="closeTransactions"
-        >
-            <transaction-table
-                :user-id="openedTransactions.userId"
-                :cid="openedTransactions.cid"
-            />
-        </auto-modal>
     </div>
 </template>
 
@@ -158,7 +137,6 @@ import { useI18n } from 'vue-i18n';
 import AutoButton from "#/shared/components/button/auto-button.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { ref, inject } from "vue";
-import AutoModal from "#/shared/components/auto-modal.vue";
 import ModelForm from "./model-form.vue";
 import axios from "axios";
 import AdminContentCard from "#/admin/components/admin-content-card.vue";
@@ -168,30 +146,28 @@ import TransactionTable from "./transaction-table.vue";
 const $i18n = useI18n();
 const $helper = inject('$helper');
 const $userStore = useUserStore();
+const $modalStore = inject('$modalStore');
 
 const statistics = ref({});
 const dt = ref();
-const model = ref(null);
-const formOpened = ref(false);
-const openedTransactions = ref({userId: null, cid: null, identity: null});
 
 const openTransactions = (userId = null, cid = null, identity = null) => {
-    openedTransactions.value = { userId, cid, identity };
-};
-
-const closeTransactions = () => {
-    openedTransactions.value = { userId: null, cid: null };
+    $modalStore.open(
+        TransactionTable,
+        { userId, cid },
+        { title: identity || 'Transaction History' }
+    );
 };
 
 const onFormOpen = (m = null) => {
-    model.value = m;
-    formOpened.value = true;
+    $modalStore.open(
+        ModelForm,
+        { model: m },
+        { title: m ? 'Edit User' : 'Create User' },
+        () => dt.value.fetchData() // Close callback
+    );
 };
-const onFormClose = () => {
-    model.value = null;
-    formOpened.value = false;
-    dt.value.fetchData();
-};
+
 const onTableLoaded = async () => {
     try {
         const data = await axios.post('/user/user/load_statistics');

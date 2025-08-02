@@ -62,6 +62,10 @@ const helpers = {
         app.provide('$localeStore', app.localeStore);
         app.config.globalProperties.$localeStore = app.localeStore;
 
+        app.modalStore = useUserModalStore();
+        app.provide('$modalStore', app.modalStore);
+        app.config.globalProperties.$modalStore = app.modalStore;
+
         app.role = role;
         app.provide('$role', role);
         app.config.globalProperties.$role = role;

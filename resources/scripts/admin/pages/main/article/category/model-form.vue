@@ -16,23 +16,22 @@
         <form-select v-model="formState.list_display_style" :errors="formError.list_display_style" :label="$t('List display style')" :options="$helper.getEnumOptions('ArticleCategory.list_display_style')" />
         <form-select v-model="formState.details_show_article_cover" :errors="formError.details_show_article_cover" :label="$t('Details show cover image')" :options="$helper.getEnumOptions('ArticleCategory.details_show_article_cover')" />
         <form-select v-model="formState.details_show_article_datetime" :errors="formError.details_show_article_datetime" :label="$t('Details show date time')" :options="$helper.getEnumOptions('ArticleCategory.details_show_article_datetime')" />
-        <teleport to="#modal-footer">
-            <div class="grid grid-cols-2 gap-4">
-                <auto-button
-                    :busy="formBusy"
-                    @click="onSubmitForm"
-                >
-                    {{ $t('Submit') }}
-                </auto-button>
-                <auto-button
-                    type="plain"
-                    :busy="formBusy"
-                    @click="emit('close')"
-                >
-                    {{ $t('Cancel') }}
-                </auto-button>
-            </div>
-        </teleport>
+        <!-- Footer buttons - using reusable modal-footer class -->
+        <div class="modal-footer grid grid-cols-2 gap-4">
+            <auto-button
+                type="plain"
+                :busy="formBusy"
+                @click="emit('close')"
+            >
+                {{ $t('Cancel') }}
+            </auto-button>
+            <auto-button
+                :busy="formBusy"
+                @click="onSubmitForm"
+            >
+                {{ $t('Submit') }}
+            </auto-button>
+        </div>
     </div>
 </template>
 
