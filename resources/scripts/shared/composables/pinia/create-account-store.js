@@ -83,7 +83,7 @@ export function createAccountStore(role, options) {
                 this.token = null;
                 this.lastUpdate = null;
 
-                Cookies.remove(tokenKey);
+                Cookies.remove(tokenKey, this.getCookieOptions());
             },
             async checkIfShouldRefreshFromServer() {
                 if (this.account) {
